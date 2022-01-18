@@ -1,0 +1,42 @@
+!pip install dnspython
+!pip install pymongo['srv']
+import pymongo
+from pymongo import MongoClient
+
+
+client = pymongo.MongoClient("mongodb+srv://pratikb640:Easyhai@cluster0.df6lr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+
+db=client.pb
+records = db.one
+
+
+class NewPerson:
+  def __init__(self):
+
+    self.fname,self.sname=input("Enter your name: ").split()
+    
+
+    self.no='0'
+    while len(self.no)!=10 and self.no[:].isnumeric():
+      self.no=input("Enter 10 digit no. ")
+  
+
+    self.gmail=NewPerson.ask_gmail()
+    
+     
+  def ask_gmail():
+    a=input("Enter Gmail: ")
+    if a.endswith("@gmail.com") and a[:-10].isalnum():
+      pass
+    else:
+      print("Invalid Gmail")
+      NewPerson.ask_gmail()
+    
+    if records.find_one({'gmail':a}) is not None:
+      print("Gmail Already in DB")
+      NewPerson.ask_gmail()
+    return a
+
+
+a1=NewPerson()
+records.insert_one(a1.__dict__)
