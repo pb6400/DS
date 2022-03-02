@@ -1,0 +1,23 @@
+!pip install dnspython
+!pip install pymongo['srv']
+import pymongo
+from pymongo import MongoClient
+
+client = pymongo.MongoClient("mongodb+srv://pratikb640:Easyhai@cluster0.df6lr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority")
+
+db=client.db
+records = db.ac
+
+class NewPerson:
+  def __init__(self):
+
+    self.fname,self.sname=input("Enter your name: ").split()
+    self.balance=0
+    self.place=input()
+    self.no='0'
+    while len(self.no)!=10 and self.no[:].isnumeric():
+      self.no=input("Enter 10 digit no. ")
+  
+    insert_data=records.insert_one(self.__dict__)
+    
+a1=NewPerson()
